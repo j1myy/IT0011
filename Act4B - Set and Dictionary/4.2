@@ -1,0 +1,37 @@
+
+import pandas as pd
+
+
+file_path = 'currency.csv'
+
+currency_df = pd.read_csv(file_path, encoding='latin1')
+
+
+def currency_cvtr():
+
+    usd_amt = float(input("How much dollar do you have??? "))
+
+    target_cur = input("What currency you want to have? ").upper()
+
+
+    if target_cur in currency_df['code'].values:
+
+        exchange_r = currency_df.loc[currency_df['code'] == target_cur, 'rate'].values[0]
+
+
+        converted_amt = usd_amt * exchange_r
+
+
+
+
+        currency_n = currency_df.loc[currency_df['code'] == target_cur, 'name'].values[0]
+
+        print()
+
+        print(f"Dollar: {usd_amt} USD")
+        print(f"{currency_n}: {converted_amt}")
+    else:
+        print("Currency not found!❌")
+
+
+currency_cvtr()
