@@ -1,0 +1,42 @@
+A = {'a', 'b', 'c', 'd', 'f', 'g'}
+B = {'b', 'c', 'h', 'l', 'm', 'o'}
+C = {'c', 'f', 'h', 'd', 'k', 'i', 'j'}
+
+
+AandB = A | B
+print("a. Elements in A and B:", AandB)
+print("Count:", len(AandB))
+print()
+
+
+BnotA_C = B - (A | C)
+print("b. Elements in B but not in A or C:", BnotA_C)
+print("Count:", len(BnotA_C))
+print()
+
+print("c:")
+
+
+
+result_i = ((B | C) - A) & {'h', 'i', 'j', 'k'}
+print("i.", sorted(result_i))
+
+
+result_ii = (A & B & C) | ({'d', 'f'} & A)
+print("ii.", sorted(result_ii))
+
+
+result_iii = (A & B) | (B & C)
+print("iii.", sorted(result_iii))
+
+
+result_iv = {'d', 'f'} & A
+print("iv.", sorted(result_iv))
+
+
+result_v = A & B & C
+print("v.", sorted(result_v))
+
+
+result_vi = B - (A | C)
+print("vi.", sorted(result_vi))
