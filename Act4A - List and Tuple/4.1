@@ -1,0 +1,129 @@
+import pickle
+students = []
+
+def add_record():
+    student_id = input("Enter Student ID (6-digit number): ")
+    while len(student_id) != 6 or not student_id.isdigit():
+        student_id = input("Invalid ID! Enter a 6-digit Student ID: ")
+
+    first_name = input("Enter First Name: ")
+    last_name = input("Enter Last Name: ")
+    class_standing = float(input("Enter Class Standing Grade: "))
+    major_exam = float(input("Enter Major Exam Grade: "))
+
+
+    student = (student_id, (first_name, last_name), class_standing, major_exam)
+    students.append(student)
+    print("Record added! ✅\n")
+
+
+
+def show_all_records():
+    if not students:
+        print("No records found! ❌\n")
+        return
+    for student in students:
+        print(
+            f"ID: {student[0]}, Name: {student[1][0]} {student[1][1]}, Class Standing: {student[2]}, Major Exam: {student[3]}")
+    print()
+
+
+
+def save_file():
+    with open("students.pkl", "wb") as file:
+        pickle.dump(students, file)
+    print("Records saved successfully using pickle! 💾\n")
+
+
+
+def open_file():
+    global students
+    try:
+        with open("students.pkl", "rb") as file:
+            students = pickle.load(file)
+        print("File opened successfully using pickle! 📂\n")
+    except FileNotFoundError:
+        print("No saved file found! ❌\n")
+    except EOFError:
+        print("Saved file is empty! ❌\n")
+
+
+
+def delete_record():
+    student_id = input("Enter Student ID to delete: ")
+    for student in students:
+        if student[0] == student_id:
+            students.remove(student)
+            print("Record deleted! ✅\n")
+            return
+    print("Record not found! ❌\n")
+
+
+
+def show_student_record():
+    student_id = input("Enter Student ID to search: ")
+    for student in students:
+        if student[0] == student_id:
+            print(
+                f"ID: {student[0]}, Name: {student[1][0]} {student[1][1]}, Class Standing: {student[2]}, Major Exam: {student[3]}")
+            return
+    print("Record not found! ❌\n")
+
+
+
+def edit_record():
+    student_id = input("Enter Student ID to edit: ")
+    for i, student in enumerate(students):
+        if student[0] == student_id:
+            print(f"Editing record for {student[1][0]} {student[1][1]}")
+            first_name = input("Enter New First Name : ") or student[1][0]
+            last_name = input("Enter New Last Name : ") or student[1][1]
+            class_standing = input("Enter New Class Standing Grade : ") or student[2]
+            major_exam = input("Enter New Major Exam Grade : ") or student[3]
+
+
+            students[i] = (student_id, (first_name, last_name), float(class_standing), float(major_exam))
+            print("Record updated ! ✅\n")
+            return
+    print("Record not found! ❌\n")
+
+
+
+def main_menu():
+    while True:
+        
+        print("📋 Student Record Management System 📋")
+        print("1. Open File")
+        print("2. Save File")
+        print("3. Show All Students Record")
+        print("4. Show Student Record")
+        print("5. Add Record")
+        print("6. Edit Record")
+        print("7. Delete Record")
+        print("8. Exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            open_file()
+        elif choice == "2":
+            save_file()
+        elif choice == "3":
+            show_all_records()
+        elif choice == "4":
+            show_student_record()
+        elif choice == "5":
+            add_record()
+        elif choice == "6":
+            edit_record()
+        elif choice == "7":
+            delete_record()
+        elif choice == "8":
+            print("Exiting... 🛑")
+            break
+        else:
+            print("Invalid option! ❌\n")
+
+
+if __name__ == "__main__":
+    main_menu()
