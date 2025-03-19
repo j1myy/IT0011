@@ -1,0 +1,94 @@
+
+
+def exponentiation(a, b):
+    return a ** b
+
+
+def remainder(a, b):
+    if b == 0:
+        print("Error! T-T")
+
+
+        return None
+
+    return a % b
+
+def division(a, b):
+    if b == 0:
+        print("Error! T-T")
+
+        return None
+
+    return a / b
+
+def summation(a, b):
+    if a > b:
+        print("Error! T-T")
+
+
+        return None
+
+    n = b - a + 1
+    return (n * (a + b)) // 2
+
+
+def menu():
+    while True:
+        print("___________________________________")
+        print("Mathematical Operations:")
+        print("[D] - Divide")
+        print("[E] - Exponentiation")
+        print("[R] - Remainder")
+        print("[F] - Summation")
+        print("[Q] - Quit")
+        print("____________________________________")
+
+        choice = input("Enter your choice from menu: ").strip().upper()
+
+        if choice == 'Q':
+
+            print("Goodbye!")
+
+            break
+
+        if choice in ['D', 'E', 'R']:
+            try:
+                num1 = int(input("Enter num1: "))
+                num2 = int(input("Enter num2: "))
+
+                if choice == 'D':
+                    result = division(num1, num2)
+                elif choice == 'E':
+
+                    result = exponentiation(num1, num2)
+                elif choice == 'R':
+
+                    result = remainder(num1, num2)
+
+                if result is not None:
+
+                    print("Result:", result)
+            except ValueError:
+
+                print("Invalid input. T-T")
+
+        elif choice == 'F':
+            try:
+                num1 = int(input("Enter  num1: "))
+                num2 = int(input("Enter num2: "))
+
+                result = summation(num1, num2)
+
+                if result is not None:
+
+
+                    print(f"Summation from {num1} to {num2} is:", result)
+            except ValueError:
+
+                print("Invalid input. T-T")
+        else:
+            print("Invalid choice. T-T")
+
+
+if __name__ == "__main__":
+    menu()
